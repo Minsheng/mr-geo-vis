@@ -7,6 +7,8 @@ var express = require('express');
 var PubNub = require('pubnub');
 var fs = require('fs');
 var https = require('https');
+var path = require('path');
+var favicon = require('serve-favicon');
 
 const credentials = {
     key: fs.readFileSync('./keys/key.pem'),
@@ -23,6 +25,8 @@ app.use((req, res, next) => {
 });
 
 app.use(express.static("./public"));
+
+app.use(favicon(path.join('public','images','favicon.ico')));
 
 https.createServer(credentials, app).listen(port);
 
