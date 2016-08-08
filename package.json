@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --exec babel-node src/app.js",
-    "prestart": "babel src --out-dir dist",
-    "start": "npm run prestart && node dist/app.js"
+    "start": "node ./src/app.js"
   },
   "keywords": [
     "heroku"

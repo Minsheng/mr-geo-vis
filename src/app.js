@@ -1,8 +1,12 @@
-import { createServer } from 'https'; // only use this function from https
-import fs from 'fs';
-import PubNub from 'pubnub';
-import path from 'path';
-import express from 'express';
+// import { createServer } from 'https'; // only use this function from https
+// import fs from 'fs';
+// import PubNub from 'pubnub';
+// import express from 'express';
+
+var express = require('express');
+var PubNub = require('pubnub');
+var fs = require('fs');
+var https = require('https');
 
 const credentials = {
     key: fs.readFileSync('./keys/key.pem'),
@@ -20,7 +24,7 @@ app.use((req, res, next) => {
 
 app.use(express.static("./public"));
 
-createServer(credentials, app).listen(port);
+https.createServer(credentials, app).listen(port);
 
 module.exports = app;
 
