@@ -8,7 +8,11 @@ This project is for testing out a combination of technologies including but not 
 - threejs
 
 ## Purpose
-The purpose of this tech mesh-up is to get ready for the development of a mixed reality geolocation-based visualization app. First,
+The purpose of this tech mesh-up is to get ready for the development of a mixed reality geolocation-based visualization app.
+1. create a web server with nodejs and expressjs for serving a web page over https.
+2. get the user's current position and do a listing search using the airbnb api.
+3. visualize airbnb listing information such as pricing or ratings using threejs.
+4. (optional) stream geolocation data over pubnub network for collaboration/communication purpose?
 
 ## Reference list
 
