@@ -1,25 +1,25 @@
-# Reference list
+## Introduction
+This project is for testing out a combination of technologies including but not limited to,
+- nodejs
+- geolocation API
+- pubnub
+- airbnb api(unofficial)
+- threejs
 
-Setup ES6 and build configuration
-https://egghead.io/lessons/node-js-using-es6-and-beyond-with-node-js
+## Reference list
 
-Setup pubnub node v4
-https://www.pubnub.com/docs/nodejs/data-streams-publish-and-subscribe-sdk-v4#include_pubnub_javascript_sdk_1
+[Setup ES6 and build configuration](https://egghead.io/lessons/node-js-using-es6-and-beyond-with-node-js)
 
-Geolocation tutorial using pubnub
-https://www.pubnub.com/blog/2015-04-30-google-maps-geolocation-tracking-in-realtime-with-javascript/
+[Setup pubnub node v4](https://www.pubnub.com/docs/nodejs/data-streams-publish-and-subscribe-sdk-v4#include_pubnub_javascript_sdk_1)
 
-Airbnb API node wrapper
-https://github.com/phamtrisi/airapi
+[Geolocation tutorial using pubnub](https://www.pubnub.com/blog/2015-04-30-google-maps-geolocation-tracking-in-realtime-with-javascript/)
 
-Node create https server
-https://nodejs.org/api/https.html#https_server_listen_handle_callback
+[Airbnb API node wrapper](https://github.com/phamtrisi/airapi)
 
-generate private key and ssl certificate for it, used by https server
-http://stackoverflow.com/questions/16610612/create-https-server-with-node-js
+[Node create https server](https://nodejs.org/api/https.html#https_server_listen_handle_callback)
 
-gitignore
-https://github.com/github/gitignore/blob/master/Node.gitignore
+[generate private key and ssl certificate for it, used by https server](http://stackoverflow.com/questions/16610612/create-https-server-with-node-js)
 
-package.json documentation
-https://docs.npmjs.com/getting-started/using-a-package.json
+[gitignore](https://github.com/github/gitignore/blob/master/Node.gitignore)
+
+[package.json documentation](https://docs.npmjs.com/getting-started/using-a-package.json)
