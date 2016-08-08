@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon --exec babel-node src/app.js",
     "prestart": "babel src --out-dir dist",
-    "start": "npm run build && node dist/app.js"
+    "start": "npm run prestart && node dist/app.js"
   },
   "keywords": [
     "heroku"
@@ -28,6 +28,6 @@
     "url": "git://github.com/Minsheng/mr-geo-vis.git"
   },
   "engines": {
-    "node": "4.3.0"
+    "node": "6.2.2"
   }
 }
