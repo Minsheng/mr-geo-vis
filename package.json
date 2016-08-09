@@ -16,7 +16,8 @@
     "airapi": "^0.1.0",
     "express": "^4.14.0",
     "pubnub": "*",
-    "serve-favicon": "^2.3.0"
+    "serve-favicon": "^2.3.0",
+    "yelp": "^1.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.11.4",

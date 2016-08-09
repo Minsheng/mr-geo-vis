@@ -1,9 +1,11 @@
 $(function initMap() {
-    var options = {
+    const options = {
         timeout: (5 * 1000),
         maximumAge: 0,
         enableHighAccuracy: true
     };
+
+    var name = "";
 
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
@@ -25,6 +27,42 @@ $(function initMap() {
         document.getElementById('currentLon').innerHTML = pos.lng;
 
         console.log("Your current loc: " + pos.lat + " , " + pos.lng);
+
+        var pubnub = new PubNub({
+            subscribeKey: "sub-c-441be6a2-5d04-11e6-ada4-02ee2ddab7fe",
+            publishKey: "pub-c-d223f6bb-65ab-4128-b272-3984970759c1",
+            uuid: name,
+            ssl: true
+        });
+
+        pubnub.publish({
+            channel  : 'mr-demo',
+            message  : {
+                uuid : pubnub.getUUID(),
+                type : 'geo',
+                position : pos ? pos : "not found"
+            },
+            callback : function(m){
+                console.log(m)
+            }
+        });
+
+        pubnub.addListener({
+            message: function(message) {
+                // handle incoming messages
+                console.log(message);
+            },
+            presence: function(presence) {
+                // handle incoming presence events.
+            },
+            status: function(status) {
+                // handle incoming status events.
+            }
+        });
+
+        pubnub.subscribe({
+            channels: ['mr-demo']
+        });
     };
 
     function handleLocationError(browserHasGeolocation) {
