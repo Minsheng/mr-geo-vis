@@ -4,21 +4,30 @@ This project is for testing out a combination of technologies including but not 
 - expressjs
 - geolocation API
 - pubnub
-- airbnb api(unofficial)
+- yelp API
 - threejs
 
 ## Purpose
 The purpose of this tech mesh-up is to get ready for the development of a mixed reality geolocation-based visualization app.
 
 1. create a web server with nodejs and expressjs for serving a web page over https.
-2. get the user's current position and do a listing search using the airbnb api.
-3. visualize airbnb listing information such as pricing or ratings using threejs.
+2. get the user's current position and do a listing search using the yelp api.
+3. visualize yelp listing information such as pricing or ratings using threejs.
 4. (optional) stream geolocation data over pubnub network for collaboration/communication purpose?
 
 The idea of the mixed reality app was co-developed with Michael Carnevale.
 
 ## Usage
-To run it locally, open a terminal window, go to the root folder of the project, and type
+Make sure you have nodejs installed before you running into the following steps.
+
+After you check out the project, you need to install the dependencies.
+
+Open a terminal window, go to the root folder of the project, and type
+```
+npm install
+```
+
+And run it locally,
 ```
 npm run dev
 ```
@@ -26,8 +35,6 @@ or
 ```
 node ./src/app.js
 ```
-
-Make sure you have nodejs installed.
 
 ## Tech mesh-up process
 I encountered a lot of problems setting up the web server and attempting to deploy it.
@@ -40,7 +47,7 @@ I also did some configuration to adopt es6 such as the import syntax. But when I
 
 Another thing I tried was to publish and subscribe data through pubnub. I successfully set up a channel and was able to send some sample messages. I can publish a user's geolocation data through pubnub and make it accessible to some other users.
 
-In terms of other APIs, I played with a nodejs wrapper for an unofficial airbnb API. My original purpose was to search airbnb listing based on a user's realtime location and visualize it using threejs. But since the the airbnb API doesn't seem to take coordinate parameters, I switched to a nodejs wrapper for Yelp API. Yelp has a Search API where I can search information about local businesses. I have flexible options of searching such as by address or by coordinates.
+In terms of other APIs, I played with a nodejs wrapper for an unofficial airbnb API. My original purpose was to search airbnb listing based on a user's realtime location and visualize it using threejs. But since the the airbnb API doesn't seem to take coordinate parameters, I switched to a nodejs wrapper for the Yelp API. Yelp has a Search API where I can search information about local businesses. I have flexible options of searching such as by address or by coordinates.
 
 I am still in the process of implementing doing a yelp search based on the user's current coordinate. But I can't do it easily on the client side unless I use requirejs. I also have't tackled how to handle the response.
 
