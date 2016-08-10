@@ -28,10 +28,15 @@ node ./src/app.js
 
 ## Folder structure
 keys/, contains the credentials for building a https server
+
 public/, contains the client code
+
 src/, contains the server code
+
 package.json, defines the dependencies and the configuration of the app
+
 .gitignore, defines the files/directories to exclude when committing to git repository
+
 .babelrc, config file for babel for interpreting ecmascript 2015
 
 ## Purpose
