@@ -6,20 +6,23 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var Yelp = require('yelp');
 
+// for the https authentication
 const credentials = {
     key: fs.readFileSync('./keys/key.pem'),
     cert: fs.readFileSync('./keys/key-cert.pem')
 };
 
+// for deployment on Heroku, port number will get replaced
 var port = process.env.PORT || 8000;
 
 var app = express();
 
-var name = "";
+var name = ""; // random client id for pubnub connection
 
 app.use((req, res, next) => {
     console.log(`${req.method} request for ${req.url}`);
 
+    // set up pubnub authentication so the server can publish and subscribe through pubnub channel
     var pubnub = new PubNub({
         subscribeKey: "sub-c-441be6a2-5d04-11e6-ada4-02ee2ddab7fe",
         publishKey: "pub-c-d223f6bb-65ab-4128-b272-3984970759c1",
@@ -27,6 +30,8 @@ app.use((req, res, next) => {
         ssl: true
     });
 
+    // the server will subscribe to a pubnub channel, get the geolocation data of a client,
+    // and publish the api search result back to the channel
     pubnub.addListener({
         status: function(statusEvent) {
         },
@@ -49,6 +54,7 @@ app.use((req, res, next) => {
                     cll: pos_param,
                     limit: 10
                 }).then(function (data) {
+                    // process the api search result
                     var business_data_to_send = convertSearchResult(data);
 
                     pubnub.publish({
@@ -79,6 +85,7 @@ app.use((req, res, next) => {
     next(); // send response back
 });
 
+// only retrieve a list of buisness names and their ratings
 function convertSearchResult(result) {
     console.log("convertSearchResult reached");
 
@@ -104,6 +111,7 @@ app.use(express.static("./public"));
 
 app.use(favicon(path.join('public','images','favicon.ico')));
 
+// create a https server
 https.createServer(credentials, app).listen(port);
 
 module.exports = app;

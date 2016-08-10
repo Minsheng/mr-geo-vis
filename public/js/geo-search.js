@@ -1,3 +1,4 @@
+// this function will be executed when the page is loaded
 $(function initMap() {
     const options = {
         timeout: (5 * 1000),
@@ -5,6 +6,7 @@ $(function initMap() {
         enableHighAccuracy: true
     };
 
+    // random client id for pubnub connection
     var name = "";
 
     // Try HTML5 geolocation.
@@ -17,17 +19,20 @@ $(function initMap() {
         handleLocationError(false);
     }
 
+    // the argument position contains the coordinate of the current user
     function success(position) {
         var pos = {
             lat: position.coords.latitude,
             lng: position.coords.longitude
         };
 
+        // updating the coordinate information on the html page
         document.getElementById('currentLat').innerHTML = pos.lat;
         document.getElementById('currentLon').innerHTML = pos.lng;
 
         console.log("Your current loc: " + pos.lat + " , " + pos.lng);
 
+        // set up pubnub authentication so the client can publish and subscribe through pubnub channel
         var pubnub = new PubNub({
             subscribeKey: "sub-c-441be6a2-5d04-11e6-ada4-02ee2ddab7fe",
             publishKey: "pub-c-d223f6bb-65ab-4128-b272-3984970759c1",
@@ -35,18 +40,20 @@ $(function initMap() {
             ssl: true
         });
 
+        // publish the coordinate through a channel
         pubnub.publish({
             channel  : 'mr-demo',
             message  : {
-                uuid : pubnub.getUUID(),
+                uuid : pubnub.getUUID(), // get the user id
                 type : 'geo',
-                position : pos ? pos : "not found"
+                position : pos ? pos : "not found" // if coordinate not identified return a placeholder
             },
             callback : function(m){
                 console.log(m)
             }
         });
 
+        // handle any message that's been published through the channel
         pubnub.addListener({
             message: function(message) {
                 // handle incoming messages
@@ -60,11 +67,13 @@ $(function initMap() {
             }
         });
 
+        // subscribe to one or more channels
         pubnub.subscribe({
             channels: ['mr-demo']
         });
     };
 
+    // error handling function
     function handleLocationError(browserHasGeolocation) {
         console.log(browserHasGeolocation ?
             'Error: The Geolocation service failed.' :

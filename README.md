@@ -7,16 +7,6 @@ This project is for testing out a combination of technologies including but not 
 - yelp API
 - threejs
 
-## Purpose
-The purpose of this tech mesh-up is to get ready for the development of a mixed reality geolocation-based visualization app.
-
-1. create a web server with nodejs and expressjs for serving a web page over https.
-2. get the user's current position and do a listing search using the yelp api.
-3. visualize yelp listing information such as pricing or ratings using threejs.
-4. (optional) stream geolocation data over pubnub network for collaboration/communication purpose?
-
-The idea of the mixed reality app was co-developed with Michael Carnevale.
-
 ## Usage
 Make sure you have nodejs installed before you running into the following steps.
 
@@ -35,6 +25,24 @@ or
 ```
 node ./src/app.js
 ```
+
+## Folder structure
+keys/, contains the credentials for building a https server
+public/, contains the client code
+src/, contains the server code
+package.json, defines the dependencies and the configuration of the app
+.gitignore, defines the files/directories to exclude when committing to git repository
+.babelrc, config file for babel for interpreting ecmascript 2015
+
+## Purpose
+The purpose of this tech mesh-up is to get ready for the development of a mixed reality geolocation-based visualization app.
+
+1. create a web server with nodejs and expressjs for serving a web page over https.
+2. get the user's current position and do a listing search using the yelp api.
+3. visualize yelp listing information such as pricing or ratings using threejs.
+4. (optional) stream geolocation data over pubnub network for collaboration/communication purpose?
+
+The idea of the mixed reality app was co-developed with Michael Carnevale.
 
 ## Tech mesh-up process
 I encountered a lot of problems setting up the web server and attempting to deploy it.
