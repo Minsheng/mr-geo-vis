@@ -17,6 +17,18 @@ The purpose of this tech mesh-up is to get ready for the development of a mixed 
 
 The idea of the mixed reality app was co-developed with Michael Carnevale.
 
+## Usage
+To run it locally, open a terminal window, go to the root folder of the project, and type
+```
+npm run dev
+```
+or
+```
+node ./src/app.js
+```
+
+Make sure you have nodejs installed.
+
 ## Tech mesh-up process
 I encountered a lot of problems setting up the web server and attempting to deploy it.
 I tried to use Meteor + AngularJS since it minimized the server code I need to write so I can focus on the client side logic.
