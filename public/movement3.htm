@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!-- saved from url=(0064)http://dev.digitalfutures.media/examples/advanced/movement3.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>movement3.html</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <style type="text/css">
+    body {
+      font-family: sans-serif;
+    }
+  
+      .main {
+      border: 1px solid black;
+      background-color: #ddd;
+      width: 375px;
+      margin-left:auto;
+      margin-right:auto;  
+    }
+    
+  </style>
+
+</head>
+<body cz-shortcut-listen="true">
+  <div class="main">
+    <h2>Device Motion</h2>
+    <table>
+      <tbody><tr>
+          <td>Event Supported</td><td id="dmEvent"></td>
+        </tr>
+      <tr>
+        <td>acceleration</td><td id="moAccel">[0, 0, 0]</td>
+      </tr>
+      <tr>
+        <td>accelerationIncludingGravity</td><td id="moAccelGrav">[0, 0, 0]</td>
+      </tr>
+      <tr>
+        <td>rotationRate</td><td id="moRotation">[0, 0, 0]</td>
+      </tr>
+      <tr>
+        <td>interval</td><td id="moInterval">0</td>
+      </tr>
+    </tbody></table>
+  </div>
+  
+  <script type="text/javascript">
+  
+    init();
+
+    
+    function init() {
+      if ((window.DeviceMotionEvent) || ('listenForDeviceMovement' in window)) {
+        window.addEventListener('devicemotion', deviceMotionHandler, false);
+      } else {
+        document.getElementById("dmEvent").innerHTML = "Not supported on your device or browser.  Sorry."
+      }
+    }
+    
+    function deviceMotionHandler(eventData) {
+      var info, xyz = "[X, Y, Z]";
+
+      // Grab the acceleration including gravity from the results
+      var acceleration = eventData.acceleration;
+      info = xyz.replace("X", round(acceleration.x));
+      info = info.replace("Y", round(acceleration.y));
+      info = info.replace("Z", round(acceleration.z));
+      document.getElementById("moAccel").innerHTML = info;
+
+      // Grab the acceleration including gravity from the results
+      acceleration = eventData.accelerationIncludingGravity;
+      info = xyz.replace("X", round(acceleration.x));
+      info = info.replace("Y", round(acceleration.y));
+      info = info.replace("Z", round(acceleration.z));
+      document.getElementById("moAccelGrav").innerHTML = info;
+
+      // Grab the acceleration including gravity from the results
+      var rotation = eventData.rotationRate;
+      info = xyz.replace("X", round(rotation.alpha));
+      info = info.replace("Y", round(rotation.beta));
+      info = info.replace("Z", round(rotation.gamma));
+      document.getElementById("moRotation").innerHTML = info;
+
+      info = eventData.interval;
+      document.getElementById("moInterval").innerHTML = info;
+    }
+
+    function round(val) {
+      var amt = 10;
+      return Math.round(val * amt) /  amt;
+    }
+
+  </script>
+  
+
+</body></html>

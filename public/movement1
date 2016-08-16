@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<?TRY OUT PHONE MOVEMENT AND DIRCTION?>
+<html lang="en">
+    <head>
+        <title>movement1</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css">
+        <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+ 
+    <style>
+        h1 {
+            font-family: verdana, sans-serif;
+            font-weight: bold;
+            font-size: 28px;
+        }
+
+        p {
+            font-family: verdana, sans-serif;
+            font-size: 12px;
+        }
+
+        #canvas {
+            width: 200px;
+            height: 200px;
+
+            border: 5px solid #ddd;
+            border-radius: 10px;
+            -moz-border-radius: 10px;
+        }
+
+        #middle {
+            background-color: #aaa;
+            position: relative;
+            width: 4px;
+            height: 4px;
+            left: 98px;
+            top: 98px;
+        }
+
+        #ball {
+            background-color: green;
+            position: relative;
+            width: 20px;
+            height: 20px;
+            left: 90px;
+            top: 90px;
+
+            border-radius: 20px;
+            -moz-border-radius: 20px;
+
+            box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+            -moz-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+            -webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+
+            background-image: -moz-linear-gradient(top, rgba(255, 255, 255, .5), rgba(255, 255, 255, 0) 12px);
+            background-image: -webkit-gradient(linear, 0 0, 0 12, from(rgba(255, 255, 255, .5)), to(rgba(255, 255, 255, 0)));
+        }
+
+        #warning {
+            display: none;
+            padding: 5px 10px;
+            font-weight: bold;
+
+            border-radius: 5px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+
+            color: black;
+            background-color: #FDFFBF;
+            border: 1px solid #D7DE07;
+        }
+
+    </style>
+</head>
+<body>
+
+
+<h1>Device Orientation - Demo</h1>
+
+<p>HTML 5 device orientation demo, not supported by all browsers.</p>
+
+<p id="warning"></p>
+
+<div id="canvas">
+    <div id="middle"></div>
+    <div id="ball"></div>
+</div>
+
+
+
+<script>
+
+    var initialX = null;
+    var initialY = null;
+
+    var ball = document.getElementById('ball');
+
+    function handleOrientationEvent(event) {
+
+        var x = event.beta ? event.beta : event.y * 90;
+        var y = event.gamma ? event.gamma : event.x * 90;
+
+        window.console && console.info('Raw position: x, y: ', x, y);
+
+        if (!initialX && !initialY) {
+
+            initialX = x;
+            initialY = y;
+
+        } else {
+
+            var positionX = initialX - x;
+            var positionY = initialY - y;
+
+            ball.style.top = (90 + positionX * 5) + 'px';
+            ball.style.left = (90 + positionY * 5) + 'px';
+        }
+    }
+
+    function isEventFired() {
+        if (!initialX && !initialY) {
+            var warningElement = document.getElementById('warning');
+            warningElement.innerText = 'Warning: Cannot receive device orientation events, this browser is not supported.';
+            warningElement.style.display = 'inline-block';
+        }
+    }
+
+    // Webkit en Mozilla variant beide registreren.
+    window.addEventListener("MozOrientation", handleOrientationEvent, true);
+    window.addEventListener("deviceorientation", handleOrientationEvent, true);
+
+    setTimeout(isEventFired, 2000);
+
+</script>
+
+
+</body>
+</html>
+
