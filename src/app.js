@@ -1,24 +1,16 @@
 var express = require('express');
 var PubNub = require('pubnub');
 var fs = require('fs');
-// var https = require('https');
 var http = require('http');
 var path = require('path');
 var favicon = require('serve-favicon');
 var Yelp = require('yelp');
-
-// for the https authentication
-// const credentials = {
-//     key: fs.readFileSync('./keys/key.pem'),
-//     cert: fs.readFileSync('./keys/key-cert.pem')
-// };
 
 // for deployment on Heroku, port number will get replaced
 var port = process.env.PORT || 8000;
 var app = express();
 
 app.use(express.static("public"));
-// app.use(favicon(__dirname + 'public/favicon.ico'));
 
 var name = ""; // random client id for pubnub connection
 
